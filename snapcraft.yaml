@@ -10,15 +10,20 @@ parts:
   logstash:
     plugin: dump
     source: https://artifacts.elastic.co/downloads/logstash/logstash-6.2.4.tar.gz
-    after: [java-jre]
-#    build-attributes: [keep-execstack]
-  java-jre:
-    plugin: jdk
-    source: .
+    build-packages: 
+    - ca-certificates
+    - ca-certificates-java
+    - openjdk-8-jre-headless
+    stage-packages:
+    - ca-certificates
+    - ca-certificates-java
+    - openjdk-8-jre-headless
 
 apps:
   logstash:
-    command: bin/logstash -f conf/logstash.conf
+    command: |
+      env LOGSTASH_HOME=$SNAP JAVA_HOME=$SNAP/usr/lib/jvm/default-java
+      bin/logstash -f conf/logstash.conf
     plugs: [network-bind, network, home]
     daemon: simple
     restart-condition: always
