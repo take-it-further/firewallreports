@@ -10,10 +10,12 @@ parts:
   logstash:
     plugin: dump
     source: https://artifacts.elastic.co/downloads/logstash/logstash-6.2.4.tar.gz
-    command: logstash-6.2.4/bin/logstash -f logstash-6.2.4/conf/logstash.conf
-    daemon: simple
-    listen-stream: 514
-
   java-jre:
     plugin: jdk
     source: .
+
+apps:
+  logstashapp:
+    command: logstash-6.2.4/bin/logstash -f logstash-6.2.4/conf/logstash.conf
+    daemon: simple
+    listen-stream: 514
