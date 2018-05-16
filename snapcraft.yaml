@@ -11,7 +11,7 @@ parts:
     plugin: dump
     source: https://artifacts.elastic.co/downloads/logstash/logstash-6.2.4.tar.gz
     after: [java-jre]
-    build-attributes: [keep-execstack]
+#    build-attributes: [keep-execstack]
   java-jre:
     plugin: jdk
     source: .
