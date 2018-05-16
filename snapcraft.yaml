@@ -1,0 +1,19 @@
+name: firewallreports
+version: '1.0' 
+summary: Log collector appliance for firewallreports.co.uk
+description: |
+  Log collector appliance for firewallreports.co.uk
+
+confinement: devmode
+
+parts:
+  logstash:
+    plugin: dump
+    source: https://artifacts.elastic.co/downloads/logstash/logstash-6.2.4.tar.gz
+    command: logstash-6.2.4/bin/logstash -f logstash-6.2.4/conf/logstash.conf
+    daemon: simple
+    listen-stream: 514
+
+  java-jre:
+    plugin: jdk
+    source: .
