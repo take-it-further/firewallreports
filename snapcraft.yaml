@@ -4,18 +4,21 @@ summary: Log collector appliance for firewallreports.co.uk
 description: |
   Log collector appliance for firewallreports.co.uk
 
-confinement: devmode
+#confinement: devmode
 
 parts:
   logstash:
     plugin: dump
     source: https://artifacts.elastic.co/downloads/logstash/logstash-6.2.4.tar.gz
+    after: [java-jre]
+    build-attributes: [keep-execstack]
   java-jre:
     plugin: jdk
     source: .
 
 apps:
-  logstashapp:
-    command: logstash-6.2.4/bin/logstash -f logstash-6.2.4/conf/logstash.conf
+  logstash:
+    command: bin/logstash -f conf/logstash.conf
+    plugs: [network-bind, network, home]
     daemon: simple
-    listen-stream: 514
+    restart-condition: always
