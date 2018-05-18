@@ -1,4 +1,4 @@
-config=$(wget -qO- --header="FWRSetup:$RET" https://live.firewallreports.co.uk/F                                                                                                                     WRSetup)
+config=$(wget -qO- --header="FWRSetup:$RET" https://live.firewallreports.co.uk/FWRSetup)
 mkdir -p $SNAP_USER_DATA/logstash/conf.d
 echo $config | jq -r '.Template' | base64 -d >  $SNAP_USER_DATA/logstash/template.json
 echo $config | jq -r '.Code' | base64 -d >  $SNAP_USER_DATA/logstash/conf.d/fwr.conf
