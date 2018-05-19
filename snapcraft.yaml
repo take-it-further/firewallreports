@@ -12,8 +12,6 @@ parts:
     source: https://artifacts.elastic.co/downloads/logstash/logstash-6.2.4.tar.gz
 #    organize:
 #      conf/: $SNAP_DATA/conf/
-    stage-packages:
-    - libc6
 
     build-packages: 
     - ca-certificates
@@ -29,7 +27,10 @@ parts:
     - openjdk-8-jre-headless
     - wget
     - jq
+    - libc6
+
 apps:
+
   logstash:
     command: |
       env LOGSTASH_HOME=$SNAP JAVA_HOME=$SNAP/usr/lib/jvm/java-8-openjdk-$SNAP_ARCH
