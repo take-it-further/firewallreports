@@ -29,6 +29,17 @@ parts:
     - jq
     - libc6
 
+  wget:
+    plugin: nil
+    stage-packages:
+      - wget
+
+  jq:
+    plugin: nil
+    stage-packages:
+      - jq
+
+
 apps:
 
   logstash:
@@ -38,6 +49,13 @@ apps:
     plugs: [network-bind, network, home]
     daemon: simple
     restart-condition: always
+  
+  wget:
+    command: wget
+    plugs: [network]
+
+  jq:
+    command: jq
 
 hooks:
   install:
