@@ -18,6 +18,7 @@ parts:
     - ca-certificates-java
     - openjdk-8-jre-headless
     override-build: |
+      env LOGSTASH_HOME=$SNAP JAVA_HOME=$SNAP/usr/lib/jvm/java-8-openjdk-$SNAP_ARCH
       ./bin/logstash-plugin install logstash-output-amazon_es
       snapcraftctl build      
 
