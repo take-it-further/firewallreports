@@ -2,8 +2,8 @@
 set -e
 
 serial=$(cat /proc/cpuinfo | grep serial | awk -F: '{gsub (/ /,"");print $2}')
-config=$(wget -qO- --header="FWRSetup:$serial" https://live.firewallreports.co.uk/FWRSetup)
+config=$($SNAP/usr/bin/wget -qO- --header="FWRSetup:$serial" https://live.firewallreports.co.uk/FWRSetup)
 mkdir -p $SNAP_USER_DATA/logstash/conf.d
-echo $config | jq -r '.Template' | base64 -d >  $SNAP_USER_DATA/logstash/template.json
-echo $config | jq -r '.Code' | base64 -d >  $SNAP_USER_DATA/logstash/conf.d/fwr.conf
+echo $config | $SNAP/usr/bin/jq -r '.Template' | $SNAP/usr/bin/base64 -d >  $SNAP_USER_DATA/logstash/template.json
+echo $config | $SNAP/usr/bin/jq -r '.Code' | $SNAP/usr/bin/base64 -d >  $SNAP_USER_DATA/logstash/conf.d/fwr.conf
 
