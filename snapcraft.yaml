@@ -9,7 +9,8 @@ description: |
 parts:
   logstash:
     plugin: dump
-    source: https://artifacts.elastic.co/downloads/logstash/logstash-6.2.4.tar.gz
+#    source: https://artifacts.elastic.co/downloads/logstash/logstash-6.2.4.tar.gz
+    source: https://artifacts.elastic.co/downloads/logstash/logstash-5.6.9.tar.gz
 #    organize:
 #      conf/: $SNAP_DATA/conf/
 
@@ -17,8 +18,9 @@ parts:
     - ca-certificates
     - ca-certificates-java
     - openjdk-8-jre-headless
+
     override-build: |
-      env LOGSTASH_HOME=$SNAP JAVA_HOME=$SNAP/usr/lib/jvm/java-8-openjdk-$SNAP_ARCH
+      #env LOGSTASH_HOME=$SNAP JAVA_HOME=$SNAP/usr/lib/jvm/java-8-openjdk-$SNAP_ARCH
       ./bin/logstash-plugin install logstash-output-amazon_es
       snapcraftctl build      
 
